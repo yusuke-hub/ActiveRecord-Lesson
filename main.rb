@@ -7,9 +7,6 @@ require 'logger'
 Time.zone_default = Time.find_zone! 'Tokyo'
 ActiveRecord::Base.default_timezone = :local
 
-# 標準出力
-ActiveRecord::Base.logger = Logger.new(STDOUT)
-
 ActiveRecord::Base.establish_connection(
   "adapter" => "sqlite3",
   "database" => "./myapp.db"
@@ -20,8 +17,16 @@ end
 
 # insert
 
-user = User.new do |u|
-  u.name = "mochozuki"
-  u.age = 18
-end
-user.save
+User.delete_all
+
+User.create(name: "tanaka", age: 19)
+User.create(name: "takahashi", age: 25)
+User.create(name: "hayashi", age: 31)
+User.create(name: "mizutani", age: 28)
+User.create(name: "otsuka", age: 35)
+
+# pp User.all
+# pp User.select("id, name, age").all
+# pp User.select("id, name, age").first
+# pp User.select("id, name, age").last
+pp User.select("id, name, age").first(3)
