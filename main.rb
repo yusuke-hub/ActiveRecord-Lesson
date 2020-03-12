@@ -25,8 +25,12 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-# pp User.all
-# pp User.select("id, name, age").all
-# pp User.select("id, name, age").first
-# pp User.select("id, name, age").last
-pp User.select("id, name, age").first(3)
+# pp User.select("id, name, age").find(3)
+
+# pp User.select("id, name, age").find_by(name: "tanaka")
+# pp User.select("id, name, age").find_by name: "tanaka"
+# pp User.select("id, name, age").find_by_name "tanaka"
+# pp User.select("id, name, age").find_by_name("tanaka")
+
+# pp User.select("id, name, age").find_by_name("kiriya")
+pp User.select("id, name, age").find_by_name!("kiriya")
