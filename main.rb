@@ -25,8 +25,14 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-user = User.find_or_create_by(name: "yokota")
-user = User.find_or_create_by(name: "yokota") do |u|
-  u.age = 18
-end
-pp user
+# update
+
+# User.update(1, age: 50)
+# User.where(name: "tanaka").update(age: 60)
+# User.where(name: "tanaka").update(age: 70, name: "taguchi")
+# User.where("age >= 20").update(age: 80)
+
+# update_all
+
+User.where("age >= 20").update_all("age = age + 2")
+pp User.select("id, name, age").all
