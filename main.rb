@@ -13,6 +13,8 @@ ActiveRecord::Base.establish_connection(
 )
 
 class User < ActiveRecord::Base
+  validates :name, :age, presence: true
+  # validates :name, length: { minimum: 3 }
 end
 
 # insert
@@ -25,13 +27,11 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-# delete: 単機能だけど高速
-# - delete
-# - delete_all
-# destroy: 高機能だけど低速
-# - destroy
-# - destroy_all
+# Validation
 
-# User.delete(1)
-User.where("age >= 25").delete_all
-pp User.select("id, name, age").all
+user = User.new(name: nil, age: nil)
+# user.save!
+
+if !user.save!
+  pp user.errors.messages
+end
