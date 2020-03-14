@@ -25,12 +25,12 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-# pp User.select("id, name, age").find(3)
+min = 20
+max = 30
 
-# pp User.select("id, name, age").find_by(name: "tanaka")
-# pp User.select("id, name, age").find_by name: "tanaka"
-# pp User.select("id, name, age").find_by_name "tanaka"
-# pp User.select("id, name, age").find_by_name("tanaka")
+# pp User.select("id, name, age").where("age >= #{min} and age < #{max}") # NG!!!
 
-# pp User.select("id, name, age").find_by_name("kiriya")
-pp User.select("id, name, age").find_by_name!("kiriya")
+# pp User.select("id, name, age").where("age >= ? and age < ?", min, max)
+# pp User.select("id, name, age").where("age >= :min and age < :max", {min: min, max: max})
+
+pp User.select("id, name, age").where("name like ?", "%a")
