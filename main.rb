@@ -13,19 +13,6 @@ ActiveRecord::Base.establish_connection(
 )
 
 class User < ActiveRecord::Base
-  # class method
-  # def self.top3
-  #   select("id, name, age").order(:age).limit(3)
-  # end
-  # scope
-  # scope :top3, -> { select("id, name, age").order(:age).limit(3) }
-
-  # class method
-  # def self.top(num)
-    # select("id, name, age").order(:age).limit(num)
-  # end
-  # scope
-  scope :top, ->(num) { select("id, name, age").order(:age).limit(num) }
 end
 
 # insert
@@ -38,6 +25,8 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-# pp User.select("id, name, age").order(:age).limit(3)
-# pp User.top3
-pp User.top(2)
+user = User.find_or_create_by(name: "yokota")
+user = User.find_or_create_by(name: "yokota") do |u|
+  u.age = 18
+end
+pp user
