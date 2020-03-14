@@ -25,14 +25,13 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-# update
+# delete: 単機能だけど高速
+# - delete
+# - delete_all
+# destroy: 高機能だけど低速
+# - destroy
+# - destroy_all
 
-# User.update(1, age: 50)
-# User.where(name: "tanaka").update(age: 60)
-# User.where(name: "tanaka").update(age: 70, name: "taguchi")
-# User.where("age >= 20").update(age: 80)
-
-# update_all
-
-User.where("age >= 20").update_all("age = age + 2")
+# User.delete(1)
+User.where("age >= 25").delete_all
 pp User.select("id, name, age").all
