@@ -13,16 +13,10 @@ ActiveRecord::Base.establish_connection(
 )
 
 class User < ActiveRecord::Base
-  before_destroy :print_before_msg
-  after_destroy :print_after_msg
-
-  protected
-    def print_before_msg
-      puts "#{self.name} will be deleted"
-    end
-    def print_after_msg
-      puts "#{self.name} deleted"
-    end
+  has_many :comments
+end
+class User < ActiveRecord::Base
+  belongs_to :user
 end
 
 # insert
@@ -35,10 +29,7 @@ User.create(name: "hayashi", age: 31)
 User.create(name: "mizutani", age: 28)
 User.create(name: "otsuka", age: 35)
 
-# callback
-
-# after_destroy
-# before_destroy
-# after_destroy
-
-User.where("age >= 20").destroy_all
+Comment.delete_all
+Comment.create(user_id: 1, body: "hello-1")
+Comment.create(user_id: 1, body: "hello-2")
+Comment.create(user_id: 2, body: "hello-3")
